@@ -48,7 +48,28 @@ export const LoginForm = () => {
                         <FormItem>
                             <FormLabel>Email</FormLabel>
                             <FormControl>
-                                
+                               <Input
+                                  {...field}
+                                  placeholder="john.doe@gmail.com"
+                                  type="email" 
+                                /> 
+                            </FormControl>
+                        </FormItem>
+                    )}
+                 />
+                 <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field}) => (
+
+                        <FormItem>
+                            <FormLabel>Password</FormLabel>
+                            <FormControl>
+                               <Input
+                                  {...field}
+                                  placeholder="*******"
+                                  type="password" 
+                                /> 
                             </FormControl>
                         </FormItem>
                     )}
