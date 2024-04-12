@@ -17,7 +17,7 @@ import {
     FormLabel, 
     FormMessage } from "@/components/ui/form";
 
-
+import { Button } from "@/components/ui/button";
 import { CardWrapper } from "@/components/auth/card-wrapper"
 export const LoginForm = () => {
     const form = useForm<z.infer<typeof LoginSchema>>({
@@ -27,6 +27,11 @@ export const LoginForm = () => {
             password:"",
         },
     });
+    
+    const onSubmit = (values: z.infer<typeof LoginSchema>) => {
+        console.log(values)
+    }
+
     return(
         <CardWrapper
           headerLabel="Welcome Back"
@@ -75,6 +80,12 @@ export const LoginForm = () => {
                     )}
                  />
               </div>
+              <Button 
+                 type="submit"
+                 className="w-full"
+              >
+               Login
+              </Button>
              </form>
            </Form>
         </CardWrapper>
