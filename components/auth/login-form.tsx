@@ -48,7 +48,7 @@ export const LoginForm = () => {
                 <FormField
                     control={form.control}
                     name="email"
-                    render={({ field}) => (
+                    render={({ field }) => (
 
                         <FormItem>
                             <FormLabel>Email</FormLabel>
@@ -59,12 +59,13 @@ export const LoginForm = () => {
                                   type="email" 
                                 /> 
                             </FormControl>
+                            <FormMessage />
                         </FormItem>
                     )}
                  />
                  <FormField
                     control={form.control}
-                    name="email"
+                    name="password"
                     render={({ field}) => (
 
                         <FormItem>
