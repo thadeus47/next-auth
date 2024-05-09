@@ -59,12 +59,13 @@ export const LoginForm = () => {
                                   type="email" 
                                 /> 
                             </FormControl>
+                            <FormMessage />
                         </FormItem>
                     )}
                  />
                  <FormField
                     control={form.control}
-                    name="email"
+                    name="password"
                     render={({ field}) => (
 
                         <FormItem>
@@ -76,6 +77,7 @@ export const LoginForm = () => {
                                   type="password" 
                                 /> 
                             </FormControl>
+                            <FormMessage />
                         </FormItem>
                     )}
                  />
