@@ -22,7 +22,7 @@ import { Button } from "@/components/ui/button";
 import { CardWrapper } from "@/components/auth/card-wrapper"
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
-import { login } from "@/actions/login";
+import { register } from "@/actions/register";
 export const RegisterForm = () => {
 
     const [error, setError] = useState<string | undefined>("");
@@ -43,7 +43,7 @@ export const RegisterForm = () => {
         setSuccess("");
 
         startTransition(() => {
-            login(values)
+            register(values)
             .then((data) => {
                 setError(data.error);
                 setSuccess(data.success)
