@@ -13,7 +13,7 @@ import {
 
 const {auth} = NextAuth(authConfig)
 
-export default auth(async (req) => {
+export default auth((req) => {
     const { nextUrl } = req;
     const isLoggedIn = !!req.auth;
 
@@ -23,7 +23,7 @@ export default auth(async (req) => {
     
     //allow every api route
     if (isApiAuthRoute) {
-        return null;
+        return 
     }
     
     //check the auth routes
@@ -31,15 +31,15 @@ export default auth(async (req) => {
         if (isLoggedIn) {
             return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl))
         }
-        return null;
+        return 
     }
 
     // check if user is not loggedin and not in public redirect "/auth/login"
     if (!isLoggedIn && !isPublicRoute) {
-        return Response.redirect(new URL("/auth/login", nextUrl))
+        return Response.redirect(new URL("/auth/login", nextUrl));
     }
     
-    return null;
+    return 
 })
 
 export const config = {

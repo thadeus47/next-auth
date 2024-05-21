@@ -26,7 +26,7 @@ export const authRoutes = [
 export const apiAuthPrefix = "/api/auth";
 
 /**
- * The default redirect path after logginf in 
- * @type {string[]}
+ * The default redirect path after logging in 
+ * @type {string}
  */
 export const DEFAULT_LOGIN_REDIRECT = "/settings";
