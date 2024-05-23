@@ -23,7 +23,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
             redirectTo: DEFAULT_LOGIN_REDIRECT 
         })
     } catch (error) {
-        //TODO
+        
         if (error instanceof AuthError) {
             switch (error.type) {
                 case "CredentialsSignin": 
@@ -32,7 +32,7 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
                   return { error: "Something went wrong!"}
             }
         }
-        
+
         throw error;
     }
 };
