@@ -1,10 +1,28 @@
 
-import NextAuth from "next-auth"
+import NextAuth, { DefaultSession } from "next-auth";
+
+import { UserRole } from "@prisma/client";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 
-import { getUserById } from "@/data/user";
 import { db } from "@/lib/db";
 import authConfig from "@/auth.config"
+import { getUserById } from "@/data/user";
+
+
+declare module "next-auth" {
+  
+
+  interface Session extends DefaultSession {
+    user?: {
+      id?: string;
+      role?: UserRole;
+    } & DefaultSession["user"];
+  }
+
+  interface JWT {
+    role?: UserRole;
+  }
+}
 
 
 export const {
@@ -24,7 +42,7 @@ export const {
         }
 
         if (token.role && session.user) {
-          session.user.role = token.role;
+          session.user.role = token.role as UserRole;
         }
       
       return session
