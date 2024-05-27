@@ -10,3 +10,4 @@ declare module "@auth/core" {
       user: ExtendedUser;
     }
   }
+ 
