@@ -12,7 +12,11 @@ import { getUserByEmail } from "@/data/user";
 export default {
   providers: [
     GitHub,
-    Google,
+    Google({
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      
+    }),
     Credentials({
       /**
        * Authorizes a user by validating their credentials.
