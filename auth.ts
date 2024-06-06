@@ -44,17 +44,16 @@ export const {
     }
   },
   callbacks: {
-    async signIn({ user , account}) {
-       //Allow OAuth without email verifivation
-       if (account?.provider !== "credentials") return true;
+    async signIn({ user, account }) {
+      //Allow OAuth without email verification
+      if (account?.provider !== "credentials") return true;
 
-       const existingUser = await getUserById(user.id);
+      const existingUser = await getUserById(user.id!);
 
-       
-       //prevent sign in without email verification
-       if (!existingUser?.emailVerified) return false;
+      //prevent sign in without email verification
+      if (!existingUser?.emailVerified) return false;
 
-       //TODO: Add 2FA check
+      //TODO: Add 2FA check
       return true;
     },
     async session({ token, session }) {
