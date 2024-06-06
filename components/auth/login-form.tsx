@@ -26,7 +26,7 @@ import { login } from "@/actions/login";
 export const LoginForm = () => {
     const searchParams = useSearchParams();
     const urlError = searchParams?.get("error") === "OAuthAccountNotLinked"
-      ? "Email alrwady in use with different provider!"
+      ? "Email already in use with different provider!"
       : "";
 
     const [error, setError] = useState<string | undefined>("");
