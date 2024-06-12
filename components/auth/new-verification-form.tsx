@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import {  BeatLoader} from "react-spinners";
 import { useSearchParams } from "next/navigation";
 
@@ -12,10 +12,14 @@ export const NewVerificationForm = () => {
 
     const token = searchParams.get('token');
 
-    const onSubmit = useCallback(() => {}
-       
-    , []);
+    const onSubmit = useCallback(() => {
+       console.log(token);
+    }, [token]);
 
+    useEffect(() => {
+      onSubmit();
+    }, [onSubmit])
+    
 
     return (
         <CardWrapper 
