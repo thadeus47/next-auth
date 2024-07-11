@@ -23,5 +23,5 @@ export const BackButton = ({
             {label}
         </Link>
       </Button>
-    )//
+    )
 }
