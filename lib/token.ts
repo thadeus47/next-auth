@@ -6,6 +6,7 @@
  * @param email - The email address to generate the verification token for.
  * @returns The newly generated verification token.
  */
+import crypt from "crypto";
 
 import { v4 as uuidv4 } from "uuid";
 import { db } from "@/lib/db";
