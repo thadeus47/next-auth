@@ -22,7 +22,7 @@ import { Button } from "@/components/ui/button";
 import { CardWrapper } from "@/components/auth/card-wrapper"
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
-import { login } from "@/actions/login";
+import { reset } from "@/actions/reset";
 
 export const ResetForm = () => {
 
@@ -41,13 +41,13 @@ export const ResetForm = () => {
         setError("");
         setSuccess("");
 
-        // startTransition(() => {
-        //     login(values)
-        //     .then((data) => {
-        //         setError(data?.error);
-        //         setSuccess(data?.success)
-        //     })
-        // });
+        startTransition(() => {
+            reset(values)
+            .then((data) => {
+                setError(data?.error);
+                setSuccess(data?.success)
+            })
+        });
 
 
         console.log(values)

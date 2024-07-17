@@ -20,7 +20,7 @@ export const reset = async (values: z.infer<typeof ResetSchema>) => {
         return { error: "Email does not exist!" };
     }
 
-    //TODO: Generate reset token
+    //TODO: Generate reset token & send email
 
     return { success: "Reset email sent!" };
 }
