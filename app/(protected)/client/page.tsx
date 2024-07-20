@@ -1,27 +1,19 @@
-"use client";
 
-import { useEffect, useState } from "react";
+
 import { UserInfo } from "@/components/user-info";
 import { currentUser } from "@/lib/auth";
 
-const ClientPage = () => {
-  const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      const userData = await currentUser();
-      setUser(userData);
-    };
+const ClientPage =  async () => {
+    const user =  await currentUser();
 
-    fetchUser();
-  }, []);
-
-  return (
-    <UserInfo 
-      label="📱 Client component"
-      user={user}  
-    />
-  );
-};
+    
+    return (
+        <UserInfo 
+            label="📱 Client component"
+            user={user}  
+        />
+    );
+}
 
 export default ClientPage;
