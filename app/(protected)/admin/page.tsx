@@ -1,10 +1,16 @@
 
+import { RoleGate } from "@/components/auth/role-gate";
+import { FormSuccess } from "@/components/form-success";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { currentRole } from "@/lib/auth";
-const AdminPage = async () => {
-    const role =  await currentRole();
+import { UserRole } from "@prisma/client";
 
-
+const AdminPage =  () => {
+    const onApiRouteClick = () => {
+        fetch("/api/admin", {
+          
+        })
+    }
     return (   
         <Card className="w-[600px]">
             <CardHeader>
@@ -13,7 +19,27 @@ const AdminPage = async () => {
                 </p>
             </CardHeader>
             <CardContent className="space-y-4">
-
+                <RoleGate allowedRole={UserRole.ADMIN}>
+                    <FormSuccess 
+                      message="You are allowed to see this page!"
+                    />
+                </RoleGate>
+                <div className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-md">
+                    <p className="text-sm font-mdeium">
+                        Admin-only API Route
+                    </p>
+                    <Button>
+                        Click to test
+                    </Button>
+                </div>
+                <div className="flex flex-row items-center justify-between rounded-lg border p-3 shadow-md">
+                    <p className="text-sm font-mdeium">
+                        Admin-only Server Action
+                    </p>
+                    <Button>
+                        Click to test
+                    </Button>
+                </div>
             </CardContent>
         </Card>
      );
