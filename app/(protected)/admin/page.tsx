@@ -7,9 +7,13 @@ import { UserRole } from "@prisma/client";
 
 const AdminPage =  () => {
     const onApiRouteClick = () => {
-        fetch("/api/admin", {
-          
+       fetch("/api/admin")
+        .then((response) => {
+            if (response.ok) {
+                console.log("OKAY")
+            }
         })
+    }
     }
     return (   
         <Card className="w-[600px]">
