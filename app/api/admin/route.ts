@@ -1,5 +1,7 @@
-import { NextResponse } from "next/server";
+import { useSession } from "next-auth/react";
 
-export async function GET() {
-    return new NextResponse(null, { status: 403 });
+export const useCurrentRole = () => {
+    const session = useSession();
+
+    return session.data?.user?.role;
 }
