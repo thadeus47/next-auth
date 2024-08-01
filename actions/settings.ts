@@ -1,10 +1,11 @@
 'use server';
 
 import * as z from 'zod';
+
 import { db } from '@/lib/db';
+import { SettingsSchema } from '@/schemas';
 import { getUserById } from '@/data/user';
 import { currentUser } from '@/lib/auth';
-import { SettingsSchema } from '@/schemas';
 
 export const settings = async (
     values: z.infer<typeof SettingsSchema>
@@ -27,7 +28,7 @@ export const settings = async (
 
     await db.user.update({
         where: {
-            id: user.id
+            id: dbUser.id
         },
         data: {
             ...values
