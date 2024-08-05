@@ -1,18 +1,20 @@
 "use client"
 
 import { useTransition } from "react";
+import { useSession } from "next-auth/react";
 
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { settings } from "@/actions/settings";
 
 const SettingsPage = () => {
+    const { update } = useSession();
     const [isPending, startTransition] = useTransition();
 
     const onClick = () => {
         startTransition(() => {
             settings({
-                name: "New Name"
+                name: "New Name!"
             });
         });
     }

@@ -88,13 +88,15 @@ export const {
         return session;
     },
     async jwt({ token }) {
-
+      console.log("I AM BEING CALLED AGAIN")
       if (!token.sub) return token;
 
       const existingUser = await getUserById(token.sub);
 
       if (!existingUser) return token;
 
+      token.name = existingUser.name;
+      token.email = existingUser.email;
       token.role = existingUser.role;
       token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
 
