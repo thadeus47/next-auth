@@ -3,7 +3,7 @@
 import  * as z from "zod"
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useTransition } from "react";
+import { useTransition, useState } from "react";
 import { useSession } from "next-auth/react";
 
 import { SettingsSchema } from "@/schemas";
@@ -14,18 +14,33 @@ import { Form, FormField, FormControl, FormItem, FormLabel, FormDescription, For
 import { Input } from "@/components/ui/input";
 
 const SettingsPage = () => {
+    const [error, setError] = useState<string | undefined>();
+    const [success, setSuccess] = useState<string | undefined>();
     const { update } = useSession();
     const [isPending, startTransition] = useTransition();
 
     const form = useForm<z.infer<typeof SettingsSchema>>({
-        resolver: zodResolver(SettingsSchema)
+        resolver: zodResolver(SettingsSchema),
+        defaultValues: {
+            name: ""
+        }
     });
 
-    const onClick = () => {
+    const onSubmit = (values: z.infer<typeof SettingsSchema>) => {
         startTransition(() => {
-            settings({
-                name: "Something different!"
-            });
+            settings(values)
+            .then((data) => {
+                if (data.error) {
+                    setError(data.error);
+                }
+
+                if (data.success) {
+                    update();
+                    setSuccess(data.success);
+                     
+                }   
+            })
+            .catch(() => setError("Something went wrong!"));
         });
     }
      
@@ -37,9 +52,34 @@ const SettingsPage = () => {
                 </p>
             </CardHeader>
             <CardContent>
-                <Button disabled={isPending} onClick={onClick}>
-                    Update name
-                </Button>
+                <Form {...form}>
+                    <form 
+                       className="w-[600px]"
+                       onSubmit={form.handleSubmit(onSubmit)}>
+                        <FormField
+                            control={form.control}
+                            name="name"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Name</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            placeholder="Your name"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormDescription>
+                                        Your name
+                                    </FormDescription>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <Button type="submit" disabled={isPending}>
+                            Save
+                        </Button>
+                    </form>
+                </Form>
             </CardContent>
         </Card>
     )
