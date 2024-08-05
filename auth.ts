@@ -8,6 +8,7 @@ import { db } from "@/lib/db";
 import authConfig from "@/auth.config"
 import { getUserById } from "@/data/user";
 import { getTwoFactorConfirmationByUserId } from "@/data/two-factor-confirmation";
+import { getAccountByUserId } from "./data/account";
 
 declare module "next-auth" {
   
@@ -84,17 +85,27 @@ export const {
         if (session.user) {
           (session.user as any).isTwoFactorEnabled = token.isTwoFactorEnabled as boolean;
         }
+
+        if (session.user) {
+          session.user.name = token.name ?? '';
+          session.user.email = token.email ?? '';
+          (session.user as any).isOAuth = token.isOAuth as boolean;
+        }
       
         return session;
     },
     async jwt({ token }) {
-      console.log("I AM BEING CALLED AGAIN")
+      
       if (!token.sub) return token;
 
       const existingUser = await getUserById(token.sub);
 
       if (!existingUser) return token;
 
+      const existingAccount  = await getAccountByUserId(existingUser.id);
+
+    
+      token.isOAuth = !!existingAccount;
       token.name = existingUser.name;
       token.email = existingUser.email;
       token.role = existingUser.role;
