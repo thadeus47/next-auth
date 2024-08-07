@@ -55,7 +55,7 @@ const SettingsPage = () => {
                 <Form {...form}>
                     <form 
                        className="space-y-6"
-                       onClick={form.handleSubmit(onSubmit)}>
+                       onSubmit={form.handleSubmit(onSubmit)}>
                         <div className="space-y-4">
                         <FormField
                             control={form.control}
