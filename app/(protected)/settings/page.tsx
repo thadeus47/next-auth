@@ -54,8 +54,9 @@ const SettingsPage = () => {
             <CardContent>
                 <Form {...form}>
                     <form 
-                       className="w-[600px]"
-                       onSubmit={form.handleSubmit(onSubmit)}>
+                       className="space-y-6"
+                       onClick={form.handleSubmit(onSubmit)}>
+                        <div className="space-y-4">
                         <FormField
                             control={form.control}
                             name="name"
@@ -64,18 +65,18 @@ const SettingsPage = () => {
                                     <FormLabel>Name</FormLabel>
                                     <FormControl>
                                         <Input
-                                            placeholder="Your name"
+                                            placeholder="John Doe"
                                             {...field}
+                                            disabled = {isPending}
+
                                         />
                                     </FormControl>
-                                    <FormDescription>
-                                        Your name
-                                    </FormDescription>
                                     <FormMessage />
                                 </FormItem>
                             )}
                         />
-                        <Button type="submit" disabled={isPending}>
+                        </div>
+                        <Button type="submit" >
                             Save
                         </Button>
                     </form>
