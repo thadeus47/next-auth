@@ -16,13 +16,13 @@ import { Input } from "@/components/ui/input";
 const SettingsPage = () => {
     const [error, setError] = useState<string | undefined>();
     const [success, setSuccess] = useState<string | undefined>();
-    const { update } = useSession();
+    const { update, data: session } = useSession();
     const [isPending, startTransition] = useTransition();
 
     const form = useForm<z.infer<typeof SettingsSchema>>({
         resolver: zodResolver(SettingsSchema),
         defaultValues: {
-            name: ""
+            name: session?.user?.name || undefined,
         }
     });
 
