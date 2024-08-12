@@ -1,7 +1,14 @@
 import  * as z from "zod";
+import { UserRole } from "@prisma/client";
+import { newPassword } from "@/actions/new-password";
 
 export const SettingsSchema = z.object({
-    name: z.optional(z.string())
+    name: z.optional(z.string()),
+    isTwoFactorEnabled: z.optional(z.boolean()),
+    role: z.enum([UserRole.ADMIN, UserRole.USER]),
+    email: z.optional(z.string().min(6)),
+    password: z.optional(z.string().min(6)),
+    newPassword: z.optional(z.string().min(6)),
 });
 
 export const NewPasswordSchema = z.object({

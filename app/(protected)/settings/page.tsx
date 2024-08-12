@@ -12,6 +12,8 @@ import { Button } from "@/components/ui/button";
 import { settings } from "@/actions/settings";
 import { Form, FormField, FormControl, FormItem, FormLabel, FormDescription, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { FormError } from "@/components/form-error";
+import { FormSuccess } from "@/components/form-success";
 
 const SettingsPage = () => {
     const [error, setError] = useState<string | undefined>();
@@ -22,7 +24,9 @@ const SettingsPage = () => {
     const form = useForm<z.infer<typeof SettingsSchema>>({
         resolver: zodResolver(SettingsSchema),
         defaultValues: {
+            password: undefined,
             name: session?.user?.name || undefined,
+            email: session?.user?.email || undefined,
         }
     });
 
@@ -76,6 +80,8 @@ const SettingsPage = () => {
                             )}
                         />
                         </div>
+                        <FormError message={error} />
+                        <FormSuccess message={success} />
                         <Button type="submit" >
                             Save
                         </Button>
