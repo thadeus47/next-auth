@@ -14,8 +14,10 @@ import { Form, FormField, FormControl, FormItem, FormLabel, FormDescription, For
 import { Input } from "@/components/ui/input";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 const SettingsPage = () => {
+    const user = useCurrentUser();
     const [error, setError] = useState<string | undefined>();
     const [success, setSuccess] = useState<string | undefined>();
     const { update, data: session } = useSession();
@@ -25,8 +27,8 @@ const SettingsPage = () => {
         resolver: zodResolver(SettingsSchema),
         defaultValues: {
             password: undefined,
-            name: session?.user?.name || undefined,
-            email: session?.user?.email || undefined,
+            name: user?.name || undefined,
+            email: user?.email || undefined,
         }
     });
 
