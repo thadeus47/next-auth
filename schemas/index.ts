@@ -25,6 +25,17 @@ export const SettingsSchema = z.object({
       path: ["newPassword"],
   })
 
+  .refine((data) => {
+    if (data.newPassword &&  !data.password){
+        return false;
+    }
+
+    return true
+  }, {
+      message: "Password is required!",
+      path: ["newPassword"],
+  })
+
 export const NewPasswordSchema = z.object({
     password: z.string().min(6, {
         message: "Minimum 6 characters required",

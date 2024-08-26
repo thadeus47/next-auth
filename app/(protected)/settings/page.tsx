@@ -81,6 +81,25 @@ const SettingsPage = () => {
                                 </FormItem>
                             )}
                         />
+                        <FormField
+                            control={form.control}
+                            name="email"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Email</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            placeholder="john.doe@example.com"
+                                            type="email"
+                                            {...field}
+                                            disabled = {isPending}
+
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
                         </div>
                         <FormError message={error} />
                         <FormSuccess message={success} />
