@@ -89,11 +89,10 @@ const SettingsPage = () => {
                                     <FormLabel>Email</FormLabel>
                                     <FormControl>
                                         <Input
-                                            placeholder="john.doe@example.com"
-                                            type="email"
                                             {...field}
+                                            placeholder="john.doe@example.com"
+                                            type="email" 
                                             disabled = {isPending}
-
                                         />
                                     </FormControl>
                                     <FormMessage />
